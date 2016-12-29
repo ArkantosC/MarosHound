@@ -22,20 +22,20 @@
 
 import Cocoa
 
-@NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate
+class MainWindowController: NSWindowController
 {
 
-    let mainWindowController = MainWindowController();
+    convenience init()
+    {
+        self.init(windowNibName: "MainWindowController")
+    }
     
-    func applicationDidFinishLaunching(_ aNotification: Notification)
+    override func windowDidLoad()
     {
-        // Insert code here to initialize your application
-        mainWindowController.showWindow(nil)
-    }
+        super.windowDidLoad()
 
-    func applicationWillTerminate(_ aNotification: Notification)
-    {
-        // Insert code here to tear down your application
+        window?.titlebarAppearsTransparent = true
+        window?.titleVisibility = .hidden
     }
+    
 }

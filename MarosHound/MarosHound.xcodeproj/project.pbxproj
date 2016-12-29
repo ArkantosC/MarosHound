@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2562E2291E121CD700316384 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2562E2271E121CD700316384 /* MainWindowController.swift */; };
+		2562E22A1E121CD700316384 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2562E2281E121CD700316384 /* MainWindowController.xib */; };
 		25C7EC6E1E102454007D2829 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7EC6D1E102454007D2829 /* AppDelegate.swift */; };
 		25C7EC701E102454007D2829 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25C7EC6F1E102454007D2829 /* Assets.xcassets */; };
-		25C7EC731E102454007D2829 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C7EC711E102454007D2829 /* MainMenu.xib */; };
 		25C7EC7E1E102454007D2829 /* MarosHoundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7EC7D1E102454007D2829 /* MarosHoundTests.swift */; };
 		25C7EC891E102454007D2829 /* MarosHoundUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7EC881E102454007D2829 /* MarosHoundUITests.swift */; };
 /* End PBXBuildFile section */
@@ -32,10 +33,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2562E2271E121CD700316384 /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		2562E2281E121CD700316384 /* MainWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindowController.xib; sourceTree = "<group>"; };
 		25C7EC6A1E102454007D2829 /* MarosHound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarosHound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C7EC6D1E102454007D2829 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		25C7EC6F1E102454007D2829 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		25C7EC721E102454007D2829 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		25C7EC741E102454007D2829 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		25C7EC791E102454007D2829 /* MarosHoundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarosHoundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		25C7EC7D1E102454007D2829 /* MarosHoundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarosHoundTests.swift; sourceTree = "<group>"; };
@@ -95,8 +97,9 @@
 			children = (
 				25C7EC6D1E102454007D2829 /* AppDelegate.swift */,
 				25C7EC6F1E102454007D2829 /* Assets.xcassets */,
-				25C7EC711E102454007D2829 /* MainMenu.xib */,
 				25C7EC741E102454007D2829 /* Info.plist */,
+				2562E2271E121CD700316384 /* MainWindowController.swift */,
+				2562E2281E121CD700316384 /* MainWindowController.xib */,
 			);
 			path = MarosHound;
 			sourceTree = "<group>";
@@ -227,7 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25C7EC701E102454007D2829 /* Assets.xcassets in Resources */,
-				25C7EC731E102454007D2829 /* MainMenu.xib in Resources */,
+				2562E22A1E121CD700316384 /* MainWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2562E2291E121CD700316384 /* MainWindowController.swift in Sources */,
 				25C7EC6E1E102454007D2829 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,17 +290,6 @@
 			targetProxy = 25C7EC851E102454007D2829 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		25C7EC711E102454007D2829 /* MainMenu.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				25C7EC721E102454007D2829 /* Base */,
-			);
-			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		25C7EC8B1E102454007D2829 /* Debug */ = {
@@ -492,6 +485,7 @@
 				25C7EC8F1E102454007D2829 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		25C7EC901E102454007D2829 /* Build configuration list for PBXNativeTarget "MarosHoundTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +494,7 @@
 				25C7EC921E102454007D2829 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		25C7EC931E102454007D2829 /* Build configuration list for PBXNativeTarget "MarosHoundUITests" */ = {
 			isa = XCConfigurationList;
@@ -508,6 +503,7 @@
 				25C7EC951E102454007D2829 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
