@@ -30,7 +30,18 @@ public final class HoundAdapter
     {
         process = true
         print ("Searching... :)")
-        
+        let queue =
+            DispatchQueue(
+                label: "com.odreria.marosHound",
+                qos: DispatchQoS.utility)
+
+        queue.async
+        {
+            for i in 0..<200000
+            {
+                print("you done", i)
+            }
+        }
     }
     
     func stop()
