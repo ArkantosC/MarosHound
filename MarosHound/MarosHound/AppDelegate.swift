@@ -26,15 +26,52 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate
 {
     @IBOutlet weak var window: NSWindow!
-
+    @IBOutlet weak var runButton: NSButton!
+    @IBOutlet weak var cancelButton: NSButton!
+    @IBOutlet weak var folderText: NSTextField!
+    @IBOutlet weak var fileNameText: NSTextField!
+    @IBOutlet weak var containingText: NSTextField!
+    
+    let adapter = HoundAdapter()
+    
     func applicationDidFinishLaunching(_ aNotification: Notification)
     {
         window.titleVisibility = NSWindowTitleVisibility.hidden
-        window.isMovableByWindowBackground = true;
+        window.isMovableByWindowBackground = true
+        runButton.isEnabled = true
+        cancelButton.isEnabled = false
     }
 
     func applicationWillTerminate(_ aNotification: Notification)
     {
         // Insert code here to tear down your application
+    }
+    
+    @IBAction func runButtonAction(_ sender: Any)
+    {
+        if (!cancelButton.isEnabled)
+        {
+            cancelButton.isEnabled = true
+            runButton.isEnabled = false
+            
+            let model = ModelHound()
+            model.folder = folderText.stringValue
+            model.fileName = fileNameText.stringValue
+            model.containingText = containingText.stringValue
+            
+            adapter.start(model: model)
+            
+        }
+    }
+    
+    @IBAction func cancelButtonAction(_ sender: Any)
+    {
+        if (!runButton.isEnabled)
+        {
+            cancelButton.isEnabled = false
+            runButton.isEnabled = true
+            adapter.stop()
+            
+        }
     }
 }

@@ -16,6 +16,11 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="MarosHound" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="SJE-mg-0f7" id="cMT-Qb-Txb"/>
+                <outlet property="containingText" destination="jSl-xk-NuO" id="ZSl-AI-CAq"/>
+                <outlet property="fileNameText" destination="VcK-sV-pVI" id="LvF-0X-3Pn"/>
+                <outlet property="folderText" destination="4UI-8F-xJD" id="D8i-z8-QtN"/>
+                <outlet property="runButton" destination="7Pl-92-Nyy" id="ZDN-4w-yU2"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
         </customObject>
@@ -680,6 +685,7 @@
                     </menu>
                 </menuItem>
             </items>
+            <point key="canvasLocation" x="177" y="483"/>
         </menu>
         <window title="MarosHound" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
@@ -761,6 +767,9 @@
 Gw
 </string>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="cancelButtonAction:" target="Voe-Tx-rLC" id="WcC-3k-Ohr"/>
+                                    </connections>
                                 </button>
                                 <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kP4-E6-MYZ">
                                     <rect key="frame" x="592" y="70" width="34" height="25"/>
@@ -775,12 +784,15 @@ Gw
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 </progressIndicator>
                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Pl-92-Nyy" userLabel="Run">
-                                    <rect key="frame" x="418" y="8" width="81" height="32"/>
+                                    <rect key="frame" x="416" y="7" width="81" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <buttonCell key="cell" type="push" title="Run" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hHV-gK-nqw" userLabel="Run">
                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                         <font key="font" metaFont="system"/>
                                     </buttonCell>
+                                    <connections>
+                                        <action selector="runButtonAction:" target="Voe-Tx-rLC" id="lRb-f1-dNb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                         </view>
@@ -877,7 +889,7 @@ Gw
                                         </subviews>
                                     </clipView>
                                     <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Jy5-rp-JGS">
-                                        <rect key="frame" x="1" y="292" width="308" height="16"/>
+                                        <rect key="frame" x="1" y="-16" width="0.0" height="16"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                     </scroller>
                                     <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="hRu-Im-nvL">
