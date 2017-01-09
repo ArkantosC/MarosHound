@@ -23,6 +23,9 @@
 
 import Foundation
 
+/**
+    Performs a data model to find the file in the folder.
+*/
 public class ModelHound
 {
     var folder: String = ""

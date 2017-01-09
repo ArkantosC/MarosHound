@@ -31,6 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
     @IBOutlet weak var folderText: NSTextField!
     @IBOutlet weak var fileNameText: NSTextField!
     @IBOutlet weak var containingText: NSTextField!
+    @IBOutlet weak var selectFolder: NSButton!
     
     let adapter = HoundAdapter()
     
@@ -40,6 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
         window.isMovableByWindowBackground = true
         runButton.isEnabled = true
         cancelButton.isEnabled = false
+        folderText.isEditable = false
     }
 
     func applicationWillTerminate(_ aNotification: Notification)
@@ -51,16 +53,26 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         if (!cancelButton.isEnabled)
         {
-            cancelButton.isEnabled = true
-            runButton.isEnabled = false
+            if (!folderText.stringValue.isEmpty)
+            {
+                cancelButton.isEnabled = true
+                runButton.isEnabled = false
             
-            let model = ModelHound()
-            model.folder = folderText.stringValue
-            model.fileName = fileNameText.stringValue
-            model.containingText = containingText.stringValue
+                let model = ModelHound()
+                model.folder = folderText.stringValue
+                model.fileName = fileNameText.stringValue
+                model.containingText = containingText.stringValue
             
-            adapter.start(model: model)
-            
+                adapter.start(model: model)
+            }
+            else
+            {
+                let alert = NSAlert()
+                alert.messageText = "You shoud select a folder."
+                alert.alertStyle = NSAlertStyle.informational
+                alert.addButton(withTitle: "OK")
+                alert.runModal()
+            }
         }
     }
     
@@ -71,7 +83,26 @@ class AppDelegate: NSObject, NSApplicationDelegate
             cancelButton.isEnabled = false
             runButton.isEnabled = true
             adapter.stop()
-            
+        }
+    }
+    
+    @IBAction func selectFolderAction(_ sender: Any)
+    {
+        let dialog = NSOpenPanel()
+        dialog.title = "Choose a folder"
+        dialog.canChooseFiles = false
+        dialog.canCreateDirectories = false
+        dialog.allowsMultipleSelection = false
+        dialog.canChooseDirectories = true
+        dialog.accessoryView?.translatesAutoresizingMaskIntoConstraints = true
+
+        if (dialog.runModal() == NSModalResponseOK)
+        {
+            let folder = dialog.directoryURL
+            if (folder != nil)
+            {
+                folderText.stringValue = (folder?.absoluteString)!
+            }
         }
     }
 }

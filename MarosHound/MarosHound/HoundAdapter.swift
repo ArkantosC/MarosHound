@@ -28,6 +28,24 @@ public final class HoundAdapter
     
     func start(model: ModelHound)
     {
+        let file = FileHandle(forReadingAtPath: "/Users/diegocortes/soapui-settings.xml")
+        
+        if (file == nil)
+        {
+            print("file open failed")
+        }
+        else
+        {
+            file?.seek(toFileOffset: 10)
+            let dataBuffer = file?.readDataToEndOfFile()
+            let str = String.init(data: dataBuffer!, encoding: .utf8)
+            let existe = str?.contains("PostgreSQL")
+            print(existe)
+            let arroz = str?.components(separatedBy: "\n")
+            print(arroz)
+            file?.closeFile()
+        }
+        
         process = true
         print ("Searching... :)")
         let queue =
@@ -37,7 +55,7 @@ public final class HoundAdapter
 
         queue.async
         {
-            for i in 0..<200000
+            for i in 0..<2
             {
                 print("you done", i)
             }
