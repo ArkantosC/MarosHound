@@ -22,44 +22,45 @@
 
 import Foundation
 
-public final class HoundAdapter
+public class Process
 {
-    private var process: Bool = false
-    private var results : [Int: String] = [0: ""]
+    private let file : FileHandle
+    private let keyWord : String
     
-    func start(model: ModelHound)
+    
+    init(file : FileHandle, keyWord: String)
     {
-        let file = FileHandle(forReadingAtPath: "/Users/diegocortes/soapui-settings.xml")
+        self.file = file
+        self.keyWord = keyWord
+    }
+    
+    func start() -> [Int: String]
+    {
+        var result : [Int: String] = [0: ""]
         
-        if (file == nil)
+        file.seek(toFileOffset: 10)
+        let dataBuffer = file.readDataToEndOfFile()
+        let str = String.init(data: dataBuffer, encoding: .utf8)
+        file.closeFile()
+        
+        let existe = str?.contains(keyWord)
+        
+        var lineNumber : Int = 0
+        if (existe)!
         {
-            print("file open failed")
-        }
-        else
-        {
-            process = true
-            print ("Searching...")
-            let queue =
-                DispatchQueue(
-                    label: "com.odreria.marosHound",
-                    qos: DispatchQoS.utility)
+            let arroz : [String] = (str?.components(separatedBy: "\n"))!
             
-            queue.async
+            for i in arroz
             {
-                let process = Process(file: file!, keyWord: "SQL")
-                self.results = process.start()
+                lineNumber += 1
+                if (i.contains(keyWord))
+                {
+                    result[lineNumber] = i
+                }
             }
         }
+        
+        return result
     }
     
-    func result() -> [Int: String]
-    {
-        return self.results
-    }
-    
-    func stop()
-    {
-        process = false
-        print ("stopping...")
-    }
 }

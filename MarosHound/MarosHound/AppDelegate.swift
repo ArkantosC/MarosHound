@@ -74,6 +74,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
                 alert.runModal()
             }
         }
+        
+        for (key, value) in adapter.result()
+        {
+            print ("\(key): \(value)")
+        }
     }
     
     @IBAction func cancelButtonAction(_ sender: Any)
