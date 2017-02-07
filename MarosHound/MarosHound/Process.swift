@@ -27,7 +27,6 @@ public class Process
     private let file : FileHandle
     private let keyWord : String
     
-    
     init(file : FileHandle, keyWord: String)
     {
         self.file = file
@@ -43,24 +42,29 @@ public class Process
         let str = String.init(data: dataBuffer, encoding: .utf8)
         file.closeFile()
         
-        let existe = str?.contains(keyWord)
+        let exist = str?.contains(keyWord)
         
         var lineNumber : Int = 0
-        if (existe)!
+        if (exist)!
         {
-            let arroz : [String] = (str?.components(separatedBy: "\n"))!
+            let findings : [String] = (str?.components(separatedBy: "\n"))!
             
-            for i in arroz
+            for value in findings
             {
                 lineNumber += 1
-                if (i.contains(keyWord))
+                if (value.contains(keyWord))
                 {
-                    result[lineNumber] = i
+                    result[lineNumber] = value
                 }
             }
         }
-        
         return result
     }
-    
+    /*
+    private func indexOf(source: String, substring: String) -> Int
+    {
+        let maxIndex = source.characters.count - substring.characters.count
+        
+        return nil
+    }*/
 }

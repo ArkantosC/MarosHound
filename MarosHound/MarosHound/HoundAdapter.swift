@@ -25,29 +25,40 @@ import Foundation
 public final class HoundAdapter
 {
     private var process: Bool = false
-    private var results : [Int: String] = [0: ""]
+    private var results: [Int: String] = [0: ""]
     
     func start(model: ModelHound)
     {
-        let file = FileHandle(forReadingAtPath: "/Users/diegocortes/soapui-settings.xml")
+        let fileManager = FileManager.default
         
-        if (file == nil)
+        let enumeratorFiles = fileManager.enumerator(atPath: model.folder)
+    
+        if (enumeratorFiles != nil)
         {
-            print("file open failed")
-        }
-        else
-        {
-            process = true
-            print ("Searching...")
-            let queue =
-                DispatchQueue(
-                    label: "com.odreria.marosHound",
-                    qos: DispatchQoS.utility)
-            
-            queue.async
+            while let elementFile = enumeratorFiles?.nextObject() as? String
             {
-                let process = Process(file: file!, keyWord: "SQL")
-                self.results = process.start()
+                let elementFileString: String = model.folder + "/" + elementFile
+                let file = FileHandle(forReadingAtPath: elementFileString)
+        
+                if (file == nil)
+                {
+                    print("file open failed")
+                }
+                else
+                {
+                    process = true
+                    print ("Searching...")
+                    let queue =
+                        DispatchQueue(
+                            label: "com.odreria.marosHound",
+                            qos: DispatchQoS.utility)
+            
+                    queue.sync
+                    {
+                        let process = Process(file: file!, keyWord: "return")
+                        self.results = process.start()
+                    }
+                }
             }
         }
     }
@@ -62,4 +73,5 @@ public final class HoundAdapter
         process = false
         print ("stopping...")
     }
+    
 }

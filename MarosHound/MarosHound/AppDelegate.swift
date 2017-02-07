@@ -41,7 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
         window.isMovableByWindowBackground = true
         runButton.isEnabled = true
         cancelButton.isEnabled = false
-        folderText.isEditable = false
+        folderText.isEditable = true
     }
 
     func applicationWillTerminate(_ aNotification: Notification)
@@ -68,7 +68,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
             else
             {
                 let alert = NSAlert()
-                alert.messageText = "You shoud select a folder."
+                alert.messageText = "You should select a folder."
                 alert.alertStyle = NSAlertStyle.informational
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
@@ -77,7 +77,10 @@ class AppDelegate: NSObject, NSApplicationDelegate
         
         for (key, value) in adapter.result()
         {
-            print ("\(key): \(value)")
+            if (key != 0)
+            {
+                print ("\(key): \(value)")
+            }
         }
     }
     
@@ -106,7 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
             let folder = dialog.directoryURL
             if (folder != nil)
             {
-                folderText.stringValue = (folder?.absoluteString)!
+                folderText.stringValue = (folder?.absoluteURL.path)!
             }
         }
     }
