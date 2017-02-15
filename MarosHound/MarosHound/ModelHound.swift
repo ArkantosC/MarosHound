@@ -28,7 +28,14 @@ import Foundation
 */
 public class ModelHound
 {
-    var folder: String = ""
-    var fileName: String = ""
-    var containingText: String = ""
+    var folder: String
+    var fileName: String
+    var containingText: String
+    
+    init(folder: String, fileName: String, containingText: String)
+    {
+        self.folder = folder
+        self.fileName = fileName.lowercased()
+        self.containingText = containingText.lowercased()
+    }
 }

@@ -37,22 +37,22 @@ public class Process
     {
         var result : [Int: String] = [0: ""]
         
-        file.seek(toFileOffset: 10)
+        file.seek(toFileOffset: 0)
         let dataBuffer = file.readDataToEndOfFile()
         let str = String.init(data: dataBuffer, encoding: .utf8)
         file.closeFile()
         
-        let exist = str?.contains(keyWord)
+        let exist = str?.lowercased().contains(keyWord)
         
         var lineNumber : Int = 0
-        if (exist)!
+        if (exist != nil)
         {
             let findings : [String] = (str?.components(separatedBy: "\n"))!
             
             for value in findings
             {
                 lineNumber += 1
-                if (value.contains(keyWord))
+                if (value.lowercased().contains(keyWord))
                 {
                     result[lineNumber] = value
                 }
@@ -60,11 +60,4 @@ public class Process
         }
         return result
     }
-    /*
-    private func indexOf(source: String, substring: String) -> Int
-    {
-        let maxIndex = source.characters.count - substring.characters.count
-        
-        return nil
-    }*/
 }

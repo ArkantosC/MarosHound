@@ -58,11 +58,11 @@ class AppDelegate: NSObject, NSApplicationDelegate
                 cancelButton.isEnabled = true
                 runButton.isEnabled = false
             
-                let model = ModelHound()
-                model.folder = folderText.stringValue
-                model.fileName = fileNameText.stringValue
-                model.containingText = containingText.stringValue
-            
+                let model = ModelHound(
+                    folder: folderText.stringValue,
+                    fileName: fileNameText.stringValue,
+                    containingText: containingText.stringValue)
+                
                 adapter.start(model: model)
             }
             else

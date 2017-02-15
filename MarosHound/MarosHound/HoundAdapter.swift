@@ -55,7 +55,7 @@ public final class HoundAdapter
             
                     queue.sync
                     {
-                        let process = Process(file: file!, keyWord: "return")
+                        let process = Process(file: file!, keyWord: model.containingText)
                         self.results = process.start()
                     }
                 }
