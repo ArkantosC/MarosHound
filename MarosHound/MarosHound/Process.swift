@@ -35,7 +35,7 @@ public class Process
     
     func start() -> [Int: String]
     {
-        var result : [Int: String] = [0: ""]
+        var result : [Int: String] = [:]
         
         file.seek(toFileOffset: 0)
         let dataBuffer = file.readDataToEndOfFile()

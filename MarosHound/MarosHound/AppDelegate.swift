@@ -32,8 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
     @IBOutlet weak var fileNameText: NSTextField!
     @IBOutlet weak var containingText: NSTextField!
     @IBOutlet weak var selectFolder: NSButton!
-    
-    let adapter = HoundAdapter()
+    @IBOutlet weak var resultTextArea: NSTextView!
     
     func applicationDidFinishLaunching(_ aNotification: Notification)
     {
@@ -42,6 +41,7 @@ class AppDelegate: NSObject, NSApplicationDelegate
         runButton.isEnabled = true
         cancelButton.isEnabled = false
         folderText.isEditable = true
+        resultTextArea.isEditable = false
     }
 
     func applicationWillTerminate(_ aNotification: Notification)
@@ -63,7 +63,21 @@ class AppDelegate: NSObject, NSApplicationDelegate
                     fileName: fileNameText.stringValue,
                     containingText: containingText.stringValue)
                 
-                adapter.start(model: model)
+                let adapter: HoundAdapter = HoundAdapter(model: model)
+                adapter.start()
+                
+                
+                for (key, subResults) in adapter.result()
+                {
+                    for (_, value) in subResults
+                    {
+                        print ("\(key): \(value)")
+                        let findings = "\(key): \(value)"
+                        let attributeString = NSAttributedString(string: findings)
+                        resultTextArea.textStorage?.append(attributeString)
+                    }
+                }
+                
             }
             else
             {
@@ -74,14 +88,6 @@ class AppDelegate: NSObject, NSApplicationDelegate
                 alert.runModal()
             }
         }
-        
-        for (key, value) in adapter.result()
-        {
-            if (key != 0)
-            {
-                print ("\(key): \(value)")
-            }
-        }
     }
     
     @IBAction func cancelButtonAction(_ sender: Any)
@@ -90,13 +96,15 @@ class AppDelegate: NSObject, NSApplicationDelegate
         {
             cancelButton.isEnabled = false
             runButton.isEnabled = true
-            adapter.stop()
+         //   adapter.stop()
         }
     }
     
     @IBAction func selectFolderAction(_ sender: Any)
     {
-        let dialog = NSOpenPanel()
+        let dialog: NSOpenPanel = NSOpenPanel()
+        dialog.prompt = "Open"
+        dialog.worksWhenModal = true
         dialog.title = "Choose a folder"
         dialog.canChooseFiles = false
         dialog.canCreateDirectories = false

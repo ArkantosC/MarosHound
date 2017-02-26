@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
@@ -20,6 +20,7 @@
                 <outlet property="containingText" destination="jSl-xk-NuO" id="ZSl-AI-CAq"/>
                 <outlet property="fileNameText" destination="VcK-sV-pVI" id="LvF-0X-3Pn"/>
                 <outlet property="folderText" destination="4UI-8F-xJD" id="D8i-z8-QtN"/>
+                <outlet property="resultTextArea" destination="Am3-u9-ke7" id="Xy2-gL-paZ"/>
                 <outlet property="runButton" destination="7Pl-92-Nyy" id="ZDN-4w-yU2"/>
                 <outlet property="selectFolder" destination="eB4-cc-eRX" id="qtU-tb-8Xh"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>

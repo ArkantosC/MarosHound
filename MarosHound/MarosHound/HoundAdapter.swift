@@ -24,46 +24,76 @@ import Foundation
 
 public final class HoundAdapter
 {
-    private var process: Bool = false
-    private var results: [Int: String] = [0: ""]
+    private var process: Bool
+    private var results: [Int: [Int:String]]
+    private var model: ModelHound
+    private var globalCount: Int
+    private var fileNames: [Int:String]
+    private var filePaths: [Int:String]
     
-    func start(model: ModelHound)
+    init (model: ModelHound)
+    {
+        self.model = model;
+        self.process = true
+        self.results = [:]
+        self.globalCount = 0
+        self.fileNames = [:]
+        self.filePaths = [:]
+    }
+    
+    func start()
     {
         let fileManager = FileManager.default
         
         let enumeratorFiles = fileManager.enumerator(atPath: model.folder)
-    
+        var files: [Int:FileHandle]  = [:]
+        
         if (enumeratorFiles != nil)
         {
+            var countQueue: Int = 0;
             while let elementFile = enumeratorFiles?.nextObject() as? String
             {
                 let elementFileString: String = model.folder + "/" + elementFile
                 let file = FileHandle(forReadingAtPath: elementFileString)
-        
+                
                 if (file == nil)
                 {
                     print("file open failed")
                 }
                 else
                 {
-                    process = true
-                    print ("Searching...")
-                    let queue =
-                        DispatchQueue(
-                            label: "com.odreria.marosHound",
-                            qos: DispatchQoS.utility)
-            
-                    queue.sync
-                    {
-                        let process = Process(file: file!, keyWord: model.containingText)
-                        self.results = process.start()
-                    }
+                    files[countQueue] = file
+                    fileNames[countQueue] = elementFile
+                    filePaths[countQueue] = elementFileString
+                    countQueue = countQueue + 1
                 }
             }
         }
+
+        if (files.count > 0)
+        {
+            for i in 0..<files.count
+            {
+                doProcess(file: files[i]!)
+            }
+        }
+        
     }
     
-    func result() -> [Int: String]
+    func doProcess(file: FileHandle)
+    {
+        let queue = DispatchQueue(label: "com.odreria.marosHound", qos: DispatchQoS.utility)
+        
+        queue.sync
+        {
+            let process = Process(file: file, keyWord: model.containingText)
+            let chunk: [Int: String] = process.start()
+            self.results[globalCount] = chunk
+            globalCount = globalCount + 1
+        }
+    }
+    
+    func result() -> [Int: [Int:String]]
     {
         return self.results
     }
